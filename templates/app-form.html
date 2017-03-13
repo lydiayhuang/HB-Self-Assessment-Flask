@@ -1,0 +1,42 @@
+
+<!-- using jinga extension and block, referenced code form jinja lecture -->
+
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h1>Application Form</h1>
+
+<!-- paragraph I used  -->
+<p>Please fill out the form line by line. Be sure to complete all fields.</p>
+
+<!-- using the POST method! -->
+<form action ="/application-response" method="POST">
+
+    First Name <input type="text" name="firstname"><br>
+    <!-- took me a few minutes to figure out how to properly assign an id tag to bold the last name -->
+    <span id="lastname">Last Name</span><input type="text" name="lastname"><br>
+
+    <!-- took me also a while to figure out what I did wrong here, my job kept on returning none on the response page, I named it job="job" instead of name="job" -->
+    Please select the job you are applying for:
+    <select name="jobjob">
+   <!--  I referenced this site to write the for loop, it was more info than I needed http://jinja.pocoo.org/docs/2.9/templates/ -->
+    {% for jobtype in jobs %}
+        <option value="{{ jobtype }}">{{jobtype}}</option>
+    {% endfor %}
+
+    </select>
+
+    <br>
+
+    *What is your salary requirement?
+    <!-- I got this off of stack overflow to try to format currency, totally didn't work. -->
+    <input type="number" pattern="^\d+(\.|\,)\d{2}$" name="quantity">
+  <!--   <input type="text" name="quantity"><br> -->
+
+    <input type="submit">
+
+</form>
+
+<footer>*Input must be in numerical values for salary.</footer>
+{% endblock %}
